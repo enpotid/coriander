@@ -5,7 +5,7 @@ use std::process::Command;
 
 #[derive(PartialEq)]
 enum TokenType {
-    Return,
+    Exit,
     IntLit,
     Semi,
 }
@@ -66,9 +66,9 @@ fn tokenize(contents: String) -> Vec<Token> {
             }
             i -= 1;
 
-            if buffer == String::from("return") {
+            if buffer == String::from("exit") {
                 tokens.push(Token {
-                    ttype: TokenType::Return,
+                    ttype: TokenType::Exit,
                     value: None,
                 });
                 buffer.clear();
@@ -111,7 +111,7 @@ fn tokenize(contents: String) -> Vec<Token> {
 fn token_to_asm(tokens: Vec<Token>) -> String {
     let mut output = String::from("global _start\n_start:\n");
     for i in 0..tokens.len() {
-        if tokens[i].ttype == TokenType::Return {
+        if tokens[i].ttype == TokenType::Exit {
             if i + 1 < tokens.len() && tokens[i + 1].ttype == TokenType::IntLit {
                 if i + 2 < tokens.len() && tokens[i + 2].ttype == TokenType::Semi {
                     output.push_str(&format!(
