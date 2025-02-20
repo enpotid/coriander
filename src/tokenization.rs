@@ -1,5 +1,22 @@
-use crate::*;
 use std::process::exit;
+
+#[derive(PartialEq, Clone)]
+pub enum TokenType {
+    Exit,
+    IntLit,
+    Semi,
+    OpenParen,
+    CloseParen,
+    Ident,
+    Let,
+    Eq,
+}
+
+#[derive(Clone)]
+pub struct Token {
+    pub ttype: TokenType,
+    pub value: Option<String>,
+}
 
 pub fn tokenize(src: String) -> Vec<Token> {
     let mut tokens = Vec::new();
@@ -7,10 +24,10 @@ pub fn tokenize(src: String) -> Vec<Token> {
     let chars: Vec<char> = src.chars().collect();
     let mut buffer: String = String::new();
     let mut i = 0;
-    while peak(&chars, i, 0).is_some() {
-        if peak(&chars, i, 0).unwrap().is_alphabetic() {
+    while peek(&chars, i, 0).is_some() {
+        if peek(&chars, i, 0).unwrap().is_alphabetic() {
             buffer.push(consume(&chars, &mut i));
-            while peak(&chars, i, 0).is_some() && peak(&chars, i, 0).unwrap().is_alphabetic() {
+            while peek(&chars, i, 0).is_some() && peek(&chars, i, 0).unwrap().is_alphabetic() {
                 buffer.push(consume(&chars, &mut i));
             }
             if buffer == String::from("exit") {
@@ -20,13 +37,24 @@ pub fn tokenize(src: String) -> Vec<Token> {
                 });
                 buffer.clear();
                 continue;
+            } else if buffer == String::from("let") {
+                tokens.push(Token {
+                    ttype: TokenType::Let,
+                    value: None,
+                });
+                buffer.clear();
+                continue;
             } else {
-                println!("wrong!");
-                exit(1);
+                tokens.push(Token {
+                    ttype: TokenType::Ident,
+                    value: Some(buffer.clone()),
+                });
+                buffer.clear();
+                continue;
             }
-        } else if peak(&chars, i, 0).unwrap().is_digit(10) {
+        } else if peek(&chars, i, 0).unwrap().is_digit(10) {
             buffer.push(consume(&chars, &mut i));
-            while peak(&chars, i, 0).is_some() && peak(&chars, i, 0).unwrap().is_digit(10) {
+            while peek(&chars, i, 0).is_some() && peek(&chars, i, 0).unwrap().is_digit(10) {
                 buffer.push(consume(&chars, &mut i));
             }
             tokens.push(Token {
@@ -35,14 +63,35 @@ pub fn tokenize(src: String) -> Vec<Token> {
             });
             buffer.clear();
             continue;
-        } else if peak(&chars, i, 0).unwrap() == ';' {
+        } else if peek(&chars, i, 0).unwrap() == '(' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::OpenParen,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == ')' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::CloseParen,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == ';' {
             consume(&chars, &mut i);
             tokens.push(Token {
                 ttype: TokenType::Semi,
                 value: None,
             });
             continue;
-        } else if peak(&chars, i, 0).unwrap().is_whitespace() {
+        } else if peek(&chars, i, 0).unwrap() == '=' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Eq,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap().is_whitespace() {
             consume(&chars, &mut i);
             continue;
         } else {
@@ -53,7 +102,7 @@ pub fn tokenize(src: String) -> Vec<Token> {
     tokens
 }
 
-fn peak(chars: &Vec<char>, i: usize, offset: usize) -> Option<char> {
+fn peek(chars: &Vec<char>, i: usize, offset: usize) -> Option<char> {
     if i + offset >= chars.len() {
         return None;
     } else {

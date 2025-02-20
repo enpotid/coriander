@@ -6,19 +6,6 @@ use std::env;
 use std::fs;
 use std::process::Command;
 
-#[derive(PartialEq, Clone)]
-enum TokenType {
-    Exit,
-    IntLit,
-    Semi,
-}
-
-#[derive(Clone)]
-struct Token {
-    ttype: TokenType,
-    value: Option<String>,
-}
-
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
@@ -38,13 +25,13 @@ fn main() {
 
     let tokens = tokenization::tokenize(contents);
 
-    let tree = parser::parse(&tokens);
-    if tree.is_none() {
-        println!("wrong!");
+    let prog = parser::parse_prog(&tokens);
+    if prog.is_none() {
+        println!("invalid program!");
         return;
     }
 
-    let output = generation::generate(tree.unwrap());
+    let output = generation::gen_prog(prog.unwrap());
 
     fs::write("out.asm", output).unwrap();
     Command::new("nasm")
