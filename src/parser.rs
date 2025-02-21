@@ -77,10 +77,10 @@ fn parse_stmt(tokens: &Vec<Token>, i: &mut usize) -> Option<NodeStmt> {
         }
         return Some(NodeStmt::Exit(stmt_exit));
     } else if peek(&tokens, *i, 0).unwrap().ttype == TokenType::Let
-        && peek(&tokens, *i, 2).is_some()
-        && peek(&tokens, *i, 2).unwrap().ttype == TokenType::Ident
         && peek(&tokens, *i, 1).is_some()
-        && peek(&tokens, *i, 1).unwrap().ttype == TokenType::Eq
+        && peek(&tokens, *i, 1).unwrap().ttype == TokenType::Ident
+        && peek(&tokens, *i, 2).is_some()
+        && peek(&tokens, *i, 2).unwrap().ttype == TokenType::Eq
     {
         consume(&tokens, i);
         let ident = consume(&tokens, i);
