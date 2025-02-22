@@ -10,6 +10,7 @@ pub enum TokenType {
     Ident,
     Let,
     Eq,
+    Plus,
 }
 
 #[derive(Clone)]
@@ -88,6 +89,13 @@ pub fn tokenize(src: String) -> Vec<Token> {
             consume(&chars, &mut i);
             tokens.push(Token {
                 ttype: TokenType::Eq,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == '+' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Plus,
                 value: None,
             });
             continue;

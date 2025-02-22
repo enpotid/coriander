@@ -1,15 +1,27 @@
 $$
 \begin{align}
-[\text{prog}] &\to [\text{stmt}]^* \\
-[\text{stmt}] &\to 
+[\text{Prog}] &\to [\text{Stmt}]^* \\
+[\text{Stmt}] &\to
 \begin{cases}
-\text{exit([\text{expr}]);}\\
-\text{let \space\text{index} = [\text{expr}];}
+\text{exit([\text{Expr}]);}\\
+\text{let \space\text{ident} = [\text{Expr}];}
 \end{cases} \\
-[\text{expr}] &\to
-\begin{cases} 
+[\text{Expr}] &\to
+\begin{cases}
+[\text{Term}] \\
+[\text{BinExpr}]\\
+\end{cases} \\
+[\text{BinExpr}] &\to
+\begin{cases}
+[\text{Expr}] + [\text{Expr}] \\
+[\text{Expr}] - [\text{Expr}] \\
+[\text{Expr}] * [\text{Expr}] \\
+[\text{Expr}] \space / \space [\text{Expr}] \\
+\end{cases} \\
+[\text{Term}] &\to
+\begin{cases}
 \text{int\_lit} \\
-\text{index}
+\text{ident} \\
 \end{cases}
 \end{align}
 $$

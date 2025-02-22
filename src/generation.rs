@@ -1,4 +1,4 @@
-use crate::parser::{NodeExpr::*, NodeStmt::*, *};
+use crate::parser::{NodeBinExpr::*, NodeExpr::*, NodeStmt::*, NodeTerm::*, *};
 use std::{collections::HashMap, process::exit};
 
 struct Var {
@@ -18,10 +18,10 @@ pub fn gen_prog(prog: NodeProg) -> String {
     output
 }
 
-fn gen_expr(expr: NodeExpr, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
-    match expr {
+fn gen_term(term: NodeTerm, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
+    match term {
         IntLit(expr_int_lit) => format!(
-            "    mov rax, {}\n{}\n",
+            "    mov rax, {}\n{}",
             expr_int_lit.int_lit.value.unwrap(),
             push("rax", stack_size)
         ),
@@ -43,17 +43,36 @@ fn gen_expr(expr: NodeExpr, stack_size: &mut usize, vars: &mut HashMap<String, V
             }
             let var = vars.get(&expr_ident.ident.value.clone().unwrap()).unwrap();
             push(
-                &format!("QWORD [rsp + {}]\n", (*stack_size - var.stack_loc - 1) * 8),
+                &format!("QWORD [rsp + {}]", (*stack_size - var.stack_loc - 1) * 8),
                 stack_size,
             )
         }
     }
 }
 
+fn gen_expr(expr: NodeExpr, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
+    match expr {
+        Term(expr_term) => gen_term(expr_term, stack_size, vars),
+        BinExpr(expr_bin) => match expr_bin.as_ref() {
+            Add(add) => {
+                format!(
+                    "{}{}{}{}    add rax, rbx\n{}",
+                    gen_expr(add.lhs.clone(), stack_size, vars),
+                    gen_expr(add.rhs.clone(), stack_size, vars),
+                    pop("rax", stack_size),
+                    pop("rbx", stack_size),
+                    push("rax", stack_size)
+                )
+            }
+            _ => String::new(),
+        },
+    }
+}
+
 fn gen_stmt(stmt: NodeStmt, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
     match stmt {
         Exit(stmt_exit) => format!(
-            "{}    mov rax, 60\n{}\n    syscall\n",
+            "{}    mov rax, 60\n{}    syscall\n",
             gen_expr(stmt_exit.expr, stack_size, vars),
             pop("rdi", stack_size)
         ),
