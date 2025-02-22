@@ -13,10 +13,10 @@ $$
 \end{cases} \\
 [\text{BinExpr}] &\to
 \begin{cases}
-[\text{Expr}] + [\text{Expr}] \\
-[\text{Expr}] - [\text{Expr}] \\
-[\text{Expr}] * [\text{Expr}] \\
-[\text{Expr}] \space / \space [\text{Expr}] \\
+[\text{Expr}] + [\text{Expr}] \space prec = 0 \\
+[\text{Expr}] - [\text{Expr}] \space prec = 0 \\
+[\text{Expr}] \space * \space [\text{Expr}] \space prec = 1 \\
+[\text{Expr}] \space \space / \space \space [\text{Expr}] \space prec = 1 \\
 \end{cases} \\
 [\text{Term}] &\to
 \begin{cases}

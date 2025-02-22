@@ -18,16 +18,19 @@ pub fn gen_prog(prog: NodeProg) -> String {
     output
 }
 
-fn gen_term(term: NodeTerm, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
+fn gen_term(term: &NodeTerm, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
     match term {
         IntLit(expr_int_lit) => format!(
             "    mov rax, {}\n{}",
-            expr_int_lit.int_lit.value.unwrap(),
+            expr_int_lit.clone().int_lit.value.unwrap(),
             push("rax", stack_size)
         ),
         Ident(expr_ident) => {
             if !vars.contains_key(&expr_ident.ident.value.clone().unwrap()) {
-                println!("undeclared identifier: {}", expr_ident.ident.value.unwrap());
+                println!(
+                    "undeclared identifier: {}",
+                    expr_ident.clone().ident.value.unwrap()
+                );
                 exit(1);
             } else if *stack_size
                 == vars
@@ -37,7 +40,7 @@ fn gen_term(term: NodeTerm, stack_size: &mut usize, vars: &mut HashMap<String, V
             {
                 println!(
                     "it cannot reference itself: {}",
-                    expr_ident.ident.value.unwrap()
+                    expr_ident.clone().ident.value.unwrap()
                 );
                 exit(1);
             }
@@ -47,25 +50,63 @@ fn gen_term(term: NodeTerm, stack_size: &mut usize, vars: &mut HashMap<String, V
                 stack_size,
             )
         }
+        Paren(expr_paren) => gen_expr(expr_paren.clone().expr, stack_size, vars),
+    }
+}
+
+fn gen_bin_expr(
+    bin_expr: &NodeBinExpr,
+    stack_size: &mut usize,
+    vars: &mut HashMap<String, Var>,
+) -> String {
+    match bin_expr {
+        Add(add) => format!(
+            "{}{}{}{}    add rax, rbx\n{}",
+            gen_expr(add.lhs.clone(), stack_size, vars),
+            gen_expr(add.rhs.clone(), stack_size, vars),
+            pop("rbx", stack_size),
+            pop("rax", stack_size),
+            push("rax", stack_size)
+        ),
+        Sub(sub) => format!(
+            "{}{}{}{}    sub rax, rbx\n{}",
+            gen_expr(sub.lhs.clone(), stack_size, vars),
+            gen_expr(sub.rhs.clone(), stack_size, vars),
+            pop("rbx", stack_size),
+            pop("rax", stack_size),
+            push("rax", stack_size)
+        ),
+        Multi(multi) => format!(
+            "{}{}{}{}    mul rbx\n{}",
+            gen_expr(multi.lhs.clone(), stack_size, vars),
+            gen_expr(multi.rhs.clone(), stack_size, vars),
+            pop("rbx", stack_size),
+            pop("rax", stack_size),
+            push("rax", stack_size)
+        ),
+        Div(div) => format!(
+            "{}{}{}{}    div rbx\n{}",
+            gen_expr(div.lhs.clone(), stack_size, vars),
+            gen_expr(div.rhs.clone(), stack_size, vars),
+            pop("rbx", stack_size),
+            pop("rax", stack_size),
+            push("rax", stack_size)
+        ),
+        Mod(modd) => format!(
+            "{}{}{}{}    div rbx\n{}",
+            gen_expr(modd.lhs.clone(), stack_size, vars),
+            gen_expr(modd.rhs.clone(), stack_size, vars),
+            pop("rbx", stack_size),
+            pop("rax", stack_size),
+            push("rdx", stack_size)
+        ),
     }
 }
 
 fn gen_expr(expr: NodeExpr, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
     match expr {
-        Term(expr_term) => gen_term(expr_term, stack_size, vars),
-        BinExpr(expr_bin) => match expr_bin.as_ref() {
-            Add(add) => {
-                format!(
-                    "{}{}{}{}    add rax, rbx\n{}",
-                    gen_expr(add.lhs.clone(), stack_size, vars),
-                    gen_expr(add.rhs.clone(), stack_size, vars),
-                    pop("rax", stack_size),
-                    pop("rbx", stack_size),
-                    push("rax", stack_size)
-                )
-            }
-            _ => String::new(),
-        },
+        Term(expr_term) => gen_term(expr_term.as_ref(), stack_size, vars),
+        BinExpr(expr_bin) => gen_bin_expr(expr_bin.as_ref(), stack_size, vars),
     }
 }
 

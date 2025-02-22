@@ -11,6 +11,10 @@ pub enum TokenType {
     Let,
     Eq,
     Plus,
+    Star,
+    Sub,
+    Div,
+    Mod,
 }
 
 #[derive(Clone)]
@@ -99,6 +103,34 @@ pub fn tokenize(src: String) -> Vec<Token> {
                 value: None,
             });
             continue;
+        } else if peek(&chars, i, 0).unwrap() == '*' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Star,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == '-' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Sub,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == '/' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Div,
+                value: None,
+            });
+            continue;
+        } else if peek(&chars, i, 0).unwrap() == '%' {
+            consume(&chars, &mut i);
+            tokens.push(Token {
+                ttype: TokenType::Mod,
+                value: None,
+            });
+            continue;
         } else if peek(&chars, i, 0).unwrap().is_whitespace() {
             consume(&chars, &mut i);
             continue;
@@ -108,6 +140,17 @@ pub fn tokenize(src: String) -> Vec<Token> {
         }
     }
     tokens
+}
+
+pub fn bin_prec(ttype: TokenType) -> Option<usize> {
+    match ttype {
+        TokenType::Plus => Some(0),
+        TokenType::Sub => Some(0),
+        TokenType::Star => Some(1),
+        TokenType::Div => Some(1),
+        TokenType::Mod => Some(1),
+        _ => None,
+    }
 }
 
 fn peek(chars: &Vec<char>, i: usize, offset: usize) -> Option<char> {
