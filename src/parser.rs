@@ -77,9 +77,15 @@ pub struct NodeStmtLet {
     pub expr: NodeExpr,
 }
 
+pub struct NodePrint {
+    pub msg: String,
+    pub ln: bool,
+}
+
 pub enum NodeStmt {
     Exit(NodeStmtExit),
     Let(NodeStmtLet),
+    Print(NodePrint),
 }
 
 pub struct NodeProg {
@@ -101,9 +107,7 @@ pub fn parse_prog(tokens: &Vec<Token>) -> Option<NodeProg> {
 }
 
 fn parse_stmt(tokens: &Vec<Token>, i: &mut usize) -> Option<NodeStmt> {
-    if try_consume_op(tokens, i, TokenType::Exit).is_some()
-        && try_consume_op(tokens, i, TokenType::OpenParen).is_some()
-    {
+    if try_consume_op(tokens, i, TokenType::Exit).is_some() {
         let stmt_exit: NodeStmtExit;
         if let Some(node_expr) = parse_expr(&tokens, i, 0) {
             stmt_exit = NodeStmtExit { expr: node_expr };
@@ -111,7 +115,6 @@ fn parse_stmt(tokens: &Vec<Token>, i: &mut usize) -> Option<NodeStmt> {
             println!("invalid expression");
             exit(1);
         }
-        try_consume(tokens, i, TokenType::CloseParen, "expected `)`");
         try_consume(tokens, i, TokenType::Semi, "expected `;`");
         return Some(NodeStmt::Exit(stmt_exit));
     } else if try_consume_op(tokens, i, TokenType::Let).is_some() {
@@ -124,6 +127,20 @@ fn parse_stmt(tokens: &Vec<Token>, i: &mut usize) -> Option<NodeStmt> {
             println!("invalid expression");
             exit(1);
         }
+    } else if try_consume_op(tokens, i, TokenType::Println).is_some() {
+        let msgt = try_consume(tokens, i, TokenType::Msg, "expected `\"\"`");
+        try_consume(tokens, i, TokenType::Semi, "expected `;`");
+        return Some(NodeStmt::Print(NodePrint {
+            msg: msgt.value.unwrap(),
+            ln: true,
+        }));
+    } else if try_consume_op(tokens, i, TokenType::Print).is_some() {
+        let msgt = try_consume(tokens, i, TokenType::Msg, "expected `\"\"`");
+        try_consume(tokens, i, TokenType::Semi, "expected `;`");
+        return Some(NodeStmt::Print(NodePrint {
+            msg: msgt.value.unwrap(),
+            ln: false,
+        }));
     } else {
         return None;
     }

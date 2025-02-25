@@ -9,6 +9,9 @@ pub enum TokenType {
     CloseParen,
     Ident,
     Let,
+    Println,
+    Print,
+    Msg,
     Eq,
     Plus,
     Star,
@@ -29,7 +32,7 @@ pub fn tokenize(src: String) -> Vec<Token> {
     let chars: Vec<char> = src.chars().collect();
     let mut buffer: String = String::new();
     let mut i = 0;
-    while peek(&chars, i, 0).is_some() {
+    'l: while peek(&chars, i, 0).is_some() {
         if peek(&chars, i, 0).unwrap().is_alphabetic() {
             buffer.push(consume(&chars, &mut i));
             while peek(&chars, i, 0).is_some() && peek(&chars, i, 0).unwrap().is_alphabetic() {
@@ -45,6 +48,20 @@ pub fn tokenize(src: String) -> Vec<Token> {
             } else if buffer == String::from("let") {
                 tokens.push(Token {
                     ttype: TokenType::Let,
+                    value: None,
+                });
+                buffer.clear();
+                continue;
+            } else if buffer == String::from("println") {
+                tokens.push(Token {
+                    ttype: TokenType::Println,
+                    value: None,
+                });
+                buffer.clear();
+                continue;
+            } else if buffer == String::from("print") {
+                tokens.push(Token {
+                    ttype: TokenType::Print,
                     value: None,
                 });
                 buffer.clear();
@@ -89,6 +106,22 @@ pub fn tokenize(src: String) -> Vec<Token> {
                 value: None,
             });
             continue;
+        } else if peek(&chars, i, 0).unwrap() == '"' {
+            consume(&chars, &mut i);
+            let mut buffer = String::new();
+            while peek(&chars, i, 0).is_some() {
+                let x = consume(&chars, &mut i);
+                if x == '"' {
+                    tokens.push(Token {
+                        ttype: TokenType::Msg,
+                        value: Some(buffer.clone()),
+                    });
+                    continue 'l;
+                }
+                buffer.push(x);
+            }
+            println!("wrong!");
+            exit(1);
         } else if peek(&chars, i, 0).unwrap() == '=' {
             consume(&chars, &mut i);
             tokens.push(Token {

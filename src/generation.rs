@@ -6,15 +6,25 @@ struct Var {
 }
 
 pub fn gen_prog(prog: NodeProg) -> String {
-    let mut output = String::from("global _start\n_start:\n");
+    let mut output = String::from("section .text\n    global _start\n\n_start:\n");
 
+    let mut msg_num = 0;
     let mut stack_size = 0;
+    let mut datas = String::new();
     let mut vars: HashMap<String, Var> = HashMap::new();
     for stmt in prog.stmts {
-        output.push_str(&gen_stmt(stmt, &mut stack_size, &mut vars));
+        output.push_str(&gen_stmt(
+            stmt,
+            &mut stack_size,
+            &mut msg_num,
+            &mut vars,
+            &mut datas,
+        ));
     }
 
-    output.push_str("    mov rax, 60\n    mov rdi, 0\n    syscall\n");
+    output.push_str("    mov rax, 60\n    mov rdi, 0\n    syscall\n\n");
+    output.push_str("section .data\n");
+    output.push_str(&datas);
     output
 }
 
@@ -85,7 +95,7 @@ fn gen_bin_expr(
             push("rax", stack_size)
         ),
         Div(div) => format!(
-            "{}{}{}{}    div rbx\n{}",
+            "{}{}{}{}    xor rdx, rdx\n    div rbx\n{}",
             gen_expr(div.lhs.clone(), stack_size, vars),
             gen_expr(div.rhs.clone(), stack_size, vars),
             pop("rbx", stack_size),
@@ -93,7 +103,7 @@ fn gen_bin_expr(
             push("rax", stack_size)
         ),
         Mod(modd) => format!(
-            "{}{}{}{}    div rbx\n{}",
+            "{}{}{}{}    xor rdx, rdx\n    div rbx\n{}",
             gen_expr(modd.lhs.clone(), stack_size, vars),
             gen_expr(modd.rhs.clone(), stack_size, vars),
             pop("rbx", stack_size),
@@ -110,7 +120,13 @@ fn gen_expr(expr: NodeExpr, stack_size: &mut usize, vars: &mut HashMap<String, V
     }
 }
 
-fn gen_stmt(stmt: NodeStmt, stack_size: &mut usize, vars: &mut HashMap<String, Var>) -> String {
+fn gen_stmt(
+    stmt: NodeStmt,
+    stack_size: &mut usize,
+    msg_num: &mut usize,
+    vars: &mut HashMap<String, Var>,
+    datas: &mut String,
+) -> String {
     match stmt {
         Exit(stmt_exit) => format!(
             "{}    mov rax, 60\n{}    syscall\n",
@@ -129,6 +145,18 @@ fn gen_stmt(stmt: NodeStmt, stack_size: &mut usize, vars: &mut HashMap<String, V
                 },
             );
             gen_expr(stmt_let.expr, stack_size, vars)
+        }
+        Print(stmt_print) => {
+            *msg_num += 1;
+            datas.push_str(&format!(
+                "    msg{} db '{}'{}\n    len{} equ $ - msg{}\n",
+                msg_num,
+                stmt_print.msg,
+                if stmt_print.ln { ", 0xA" } else { "" },
+                msg_num,
+                msg_num
+            ));
+            format!("    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg{}\n    mov rdx, len{}\n    syscall\n", msg_num, msg_num)
         }
     }
 }
