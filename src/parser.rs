@@ -77,9 +77,13 @@ pub struct NodeStmtLet {
     pub expr: NodeExpr,
 }
 
+pub enum NodePExpr {
+    Str(String),
+    Expr(NodeExpr),
+}
+
 pub struct NodePrint {
-    pub msg: String,
-    pub ln: bool,
+    pub plist: Vec<NodePExpr>,
 }
 
 pub enum NodeStmt {
@@ -127,20 +131,37 @@ fn parse_stmt(tokens: &Vec<Token>, i: &mut usize) -> Option<NodeStmt> {
             println!("invalid expression");
             exit(1);
         }
-    } else if try_consume_op(tokens, i, TokenType::Println).is_some() {
-        let msgt = try_consume(tokens, i, TokenType::Msg, "expected `\"\"`");
-        try_consume(tokens, i, TokenType::Semi, "expected `;`");
-        return Some(NodeStmt::Print(NodePrint {
-            msg: msgt.value.unwrap(),
-            ln: true,
-        }));
     } else if try_consume_op(tokens, i, TokenType::Print).is_some() {
-        let msgt = try_consume(tokens, i, TokenType::Msg, "expected `\"\"`");
-        try_consume(tokens, i, TokenType::Semi, "expected `;`");
-        return Some(NodeStmt::Print(NodePrint {
-            msg: msgt.value.unwrap(),
-            ln: false,
-        }));
+        let mut plist = Vec::new();
+        loop {
+            if let Some(_) = try_consume_op(tokens, i, TokenType::Semi) {
+                break;
+            } else {
+                let pexpr = try_consume_vec(
+                    tokens,
+                    i,
+                    vec![TokenType::Msg, TokenType::IntLit, TokenType::Ident],
+                    "expected ';'",
+                );
+
+                match pexpr.ttype {
+                    TokenType::Msg => {
+                        plist.push(NodePExpr::Str(pexpr.value.unwrap()));
+                    }
+                    TokenType::Ident => {
+                        plist.push(NodePExpr::Expr(NodeExpr::Term(Box::new(NodeTerm::Ident(
+                            NodeTermIdent { ident: pexpr },
+                        )))));
+                    }
+                    _ => {
+                        plist.push(NodePExpr::Expr(NodeExpr::Term(Box::new(NodeTerm::IntLit(
+                            NodeTermIntLit { int_lit: pexpr },
+                        )))));
+                    }
+                }
+            }
+        }
+        return Some(NodeStmt::Print(NodePrint { plist }));
     } else {
         return None;
     }
@@ -241,6 +262,21 @@ fn consume(tokens: &Vec<Token>, i: &mut usize) -> Token {
 fn try_consume(tokens: &Vec<Token>, i: &mut usize, ttype: TokenType, err: &str) -> Token {
     if peek(&tokens, *i, 0).is_some() && peek(&tokens, *i, 0).unwrap().ttype == ttype {
         return consume(tokens, i);
+    } else {
+        println!("{err}");
+        exit(1);
+    }
+}
+
+fn try_consume_vec(tokens: &Vec<Token>, i: &mut usize, ttype: Vec<TokenType>, err: &str) -> Token {
+    if peek(&tokens, *i, 0).is_some() {
+        for t in ttype {
+            if peek(&tokens, *i, 0).unwrap().ttype == t {
+                return consume(tokens, i);
+            }
+        }
+        println!("{err}");
+        exit(1);
     } else {
         println!("{err}");
         exit(1);

@@ -9,7 +9,6 @@ pub enum TokenType {
     CloseParen,
     Ident,
     Let,
-    Println,
     Print,
     Msg,
     Eq,
@@ -48,13 +47,6 @@ pub fn tokenize(src: String) -> Vec<Token> {
             } else if buffer == String::from("let") {
                 tokens.push(Token {
                     ttype: TokenType::Let,
-                    value: None,
-                });
-                buffer.clear();
-                continue;
-            } else if buffer == String::from("println") {
-                tokens.push(Token {
-                    ttype: TokenType::Println,
                     value: None,
                 });
                 buffer.clear();

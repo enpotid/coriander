@@ -1,16 +1,13 @@
-println "hello world!";
+let a = (10 + 5) * 2;
+let b = 50 / (4 + 1);
+let c = a % b;
 
-let a = 10;
-let b = 4;
-let c = a * b;
-let d = c % 3;
-let e = a + b;
-let f = c - a;
-let g = e * f;
-let h = g + d;
-let i = 0;
-let j = h;
-let k = i + j;
-let l = i + j + 1;
-let m = i + j + 2;
-exit i + j + i + j + 1 + i + j + 2;
+print "Step 1: a = (10 + 5) * 2 = " a;
+print "Step 2: b = 50 / (4 + 1) = " b;
+print "Step 3: c = a % b = " c;
+
+let d = (a - b) * (c + 3) / 2;
+print "Step 4: d = (a - b) * (c + 3) / 2 = " d;
+
+let e = d + (c * 3 - b % 2);
+print "Final Result: e = " e;

@@ -1,4 +1,4 @@
-use crate::parser::{NodeBinExpr::*, NodeExpr::*, NodeStmt::*, NodeTerm::*, *};
+use crate::parser::{NodeBinExpr::*, NodeExpr::*, NodePExpr::*, NodeStmt::*, NodeTerm::*, *};
 use std::{collections::HashMap, process::exit};
 
 struct Var {
@@ -23,8 +23,49 @@ pub fn gen_prog(prog: NodeProg) -> String {
     }
 
     output.push_str("    mov rax, 60\n    mov rdi, 0\n    syscall\n\n");
+    output.push_str(
+        "print_number:
+    cmp rax, 0
+    jne .compute
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, zero_msg
+    mov rdx, zero_len
+    syscall
+    ret
+
+.compute:
+    xor r8, r8
+
+.compute_loop:
+    xor rdx, rdx
+    mov rbx, 10
+    div rbx
+    add dl, '0'
+    push rdx
+    inc r8
+    cmp rax, 0
+    jne .compute_loop
+
+.print_loop:
+    pop rax
+    sub rsp, 8
+    mov byte [rsp], al
+    mov rsi, rsp
+    mov rax, 1
+    mov rdi, 1
+    mov rdx, 1
+    syscall
+    add rsp, 8
+    dec r8
+    cmp r8, 0
+    jne .print_loop
+    ret\n\n",
+    );
     output.push_str("section .data\n");
     output.push_str(&datas);
+    output.push_str("    zero_msg db '0'\n    zero_len equ $ - zero_msg");
+
     output
 }
 
@@ -146,17 +187,26 @@ fn gen_stmt(
             );
             gen_expr(stmt_let.expr, stack_size, vars)
         }
-        Print(stmt_print) => {
-            *msg_num += 1;
-            datas.push_str(&format!(
-                "    msg{} db '{}'{}\n    len{} equ $ - msg{}\n",
-                msg_num,
-                stmt_print.msg,
-                if stmt_print.ln { ", 0xA" } else { "" },
-                msg_num,
-                msg_num
-            ));
-            format!("    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg{}\n    mov rdx, len{}\n    syscall\n", msg_num, msg_num)
+        Print(stmt_print_list) => {
+            let mut result = String::new();
+            for stmt_print in stmt_print_list.plist {
+                match stmt_print {
+                    Str(s) => {
+                        *msg_num += 1;
+                        datas.push_str(&format!(
+                            "    msg{} db '{}'\n    len{} equ $ - msg{}\n",
+                            msg_num, s, msg_num, msg_num
+                        ));
+                        result.push_str(&format!("    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg{}\n    mov rdx, len{}\n    syscall\n", msg_num, msg_num));
+                    }
+                    Expr(expr) => {
+                        result.push_str(&gen_expr(expr, stack_size, vars));
+                        result.push_str(&pop("rax", stack_size));
+                        result.push_str("    call print_number\n");
+                    }
+                }
+            }
+            result
         }
     }
 }
