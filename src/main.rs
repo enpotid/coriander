@@ -10,7 +10,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         println!("wrong!");
-        println!("ander <main.dr>");
+        println!("coriander <main.dr>");
         return;
     }
 
@@ -18,7 +18,7 @@ fn main() {
         Ok(f) => f,
         Err(_) => {
             println!("can't read file");
-            println!("ander <main.dr>");
+            println!("coriander <main.dr>");
             return;
         }
     };
