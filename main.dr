@@ -1,13 +1,9 @@
-let a = (10 + 5) * 2;
-let b = 50 / (4 + 1);
-let c = a % b;
+_start() {
+    let i = 1;
+}
 
-print "Step 1: a = (10 + 5) * 2 = " a;
-print "Step 2: b = 50 / (4 + 1) = " b;
-print "Step 3: c = a % b = " c;
-
-let d = (a - b) * (c + 3) / 2;
-print "Step 4: d = (a - b) * (c + 3) / 2 = " d;
-
-let e = d + (c * 3 - b % 2);
-print "Final Result: e = " e;
+exit() {
+    ["mov rax, 60"];
+    ["mov rdi, 1"];
+    ["syscall"];
+}
