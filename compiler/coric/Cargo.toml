@@ -1,0 +1,10 @@
+[package]
+name = "coric"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+coric_ast = { path = "../coric_ast" }
+coric_codegen = { path = "../coric_codegen" }
+coric_lexer = { path = "../coric_lexer" }
+coric_parse = { path = "../coric_parse" }
