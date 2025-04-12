@@ -1,14 +1,11 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+pub mod target;
+pub use target::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod codegen_asm;
+use coric_ast::Program;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+pub fn generate(ast: Program, target: Target) -> String {
+    match target {
+        Target::Asm => codegen_asm::generate(ast),
     }
 }

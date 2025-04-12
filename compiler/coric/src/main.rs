@@ -1,3 +1,4 @@
+use coric_codegen::Target;
 use std::env;
 use std::fs;
 use std::process::Command;
@@ -10,7 +11,7 @@ fn main() {
         return;
     }
 
-    let contents = match fs::read_to_string(&args[1]) {
+    let src = match fs::read_to_string(&args[1]) {
         Ok(f) => f,
         Err(_) => {
             println!("can't read file");
@@ -19,15 +20,20 @@ fn main() {
         }
     };
 
-    let tokens = coric_lexer::tokenize(contents);
+    let tokens = coric_lexer::tokenize(&src, args[1].clone());
 
-    let prog = parser::parse_prog(&tokens);
-    if prog.is_none() {
-        println!("invalid program!");
-        return;
-    }
+    println!("{tokens:#?}");
 
-    let output = generation::gen_prog(prog.unwrap());
+    /*
+    let ast = match coric_parse::parse_program(&tokens) {
+        Some(ast) => ast,
+        None => {
+            println!("invalid program!");
+            return;
+        }
+    };
+
+    let output = coric_codegen::generate(ast, Target::Asm);
 
     fs::write("out.asm", output).unwrap();
     Command::new("nasm")
@@ -38,4 +44,5 @@ fn main() {
         .args(["out.o", "-o", "out"])
         .spawn()
         .unwrap();
+    */
 }
