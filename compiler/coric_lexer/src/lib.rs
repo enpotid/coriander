@@ -1,57 +1,46 @@
-use coric_ast::{KeywordKind, Span, Token, TokenKind};
+mod cursor;
 
-pub fn tokenize(src: &str, filename: String) -> Vec<Token> {
-    let mut chars = src.char_indices().peekable();
-    let mut tokens = Vec::new();
+use coric_ast::{Span, Token, TokenKind};
+use cursor::*;
+use std::ops::Range;
 
-    let mut ident_buffer = String::new();
-    while let Some((i, c)) = chars.next() {
-        match c {
-            _ if c.is_alphabetic() || c == '_' => {
-                ident_buffer.push(c);
-                while let Some(&(ei, c)) = chars.peek() {
-                    if c.is_alphabetic() || c.is_digit(10) || c == '_' {
-                        ident_buffer.push(c);
-                        chars.next();
-                    } else {
-                        if let Some(keyword) = KeywordKind::from_str(&ident_buffer) {
-                            tokens.push(Token {
-                                kind: TokenKind::Keyword(keyword),
-                                span: Span {
-                                    file: filename.clone(),
-                                    range: i..ei,
-                                },
-                            });
-                        } else {
-                            tokens.push(Token {
-                                kind: TokenKind::Ident(ident_buffer.clone()),
-                                span: Span {
-                                    file: filename.clone(),
-                                    range: i..ei,
-                                },
-                            });
-                        }
-                        ident_buffer.clear();
-                        break;
-                    }
-                }
-            }
-            _ => tokens.push(Token {
-                kind: TokenKind::Unknown,
-                span: Span {
-                    file: filename.clone(),
-                    range: i..i + 1,
-                },
-            }),
+pub struct Lexer<'a> {
+    tokens: Vec<Token>,
+    cursor: Cursor<'a>,
+}
+
+impl<'a> Lexer<'a> {
+    pub fn new(src: &'a str, filename: String) -> Self {
+        Lexer {
+            tokens: Vec::new(),
+            cursor: Cursor::new(src, filename),
         }
     }
-    tokens.push(Token {
-        kind: TokenKind::Eof,
-        span: Span {
-            file: filename.clone(),
-            range: src.len()..src.len(),
-        },
-    });
 
-    tokens
+    pub fn tokenize(&mut self) -> Vec<Token> {
+        self.cursor.read_all();
+        let mut token_iter = self.cursor.tokens.clone().into_iter().peekable();
+
+        while let Some(token) = token_iter.next() {
+            match token {
+                o => self.push_token(o),
+            }
+        }
+
+        self.tokens.clone()
+    }
+
+    pub fn push_token(&mut self, token: Token) {
+        self.tokens.push(token);
+    }
+
+    pub fn push_token_range(&mut self, kind: TokenKind, range: Range<usize>) {
+        self.tokens.push(Token {
+            kind,
+            span: Span {
+                file: self.cursor.filename.clone(),
+                range,
+            },
+        });
+    }
 }

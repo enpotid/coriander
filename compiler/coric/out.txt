@@ -1,0 +1,320 @@
+[
+    Token {
+        kind: Ident(
+            "mode",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 0..4,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 4..5,
+        },
+    },
+    Token {
+        kind: Ident(
+            "main",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 5..9,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 9..10,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 10..11,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 11..12,
+        },
+    },
+    Token {
+        kind: Ident(
+            "nec",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 12..15,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 15..16,
+        },
+    },
+    Token {
+        kind: Ident(
+            "std",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 16..19,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 19..20,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 20..21,
+        },
+    },
+    Token {
+        kind: Ident(
+            "index",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 21..26,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 26..27,
+        },
+    },
+    Token {
+        kind: Ident(
+            "std",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 27..30,
+        },
+    },
+    Token {
+        kind: Lt,
+        span: Span {
+            file: "../../main.dr",
+            range: 30..31,
+        },
+    },
+    Token {
+        kind: Ident(
+            "io",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 31..33,
+        },
+    },
+    Token {
+        kind: Lt,
+        span: Span {
+            file: "../../main.dr",
+            range: 33..34,
+        },
+    },
+    Token {
+        kind: Ident(
+            "println",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 34..41,
+        },
+    },
+    Token {
+        kind: Gt,
+        span: Span {
+            file: "../../main.dr",
+            range: 41..42,
+        },
+    },
+    Token {
+        kind: Gt,
+        span: Span {
+            file: "../../main.dr",
+            range: 42..43,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 43..44,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 44..45,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 45..46,
+        },
+    },
+    Token {
+        kind: Ident(
+            "main",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 46..50,
+        },
+    },
+    Token {
+        kind: OpenParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 50..51,
+        },
+    },
+    Token {
+        kind: CloseParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 51..52,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 52..53,
+        },
+    },
+    Token {
+        kind: OpenBrace,
+        span: Span {
+            file: "../../main.dr",
+            range: 53..54,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 54..55,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 55..56,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 56..57,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 57..58,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 58..59,
+        },
+    },
+    Token {
+        kind: Ident(
+            "println",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 59..66,
+        },
+    },
+    Token {
+        kind: OpenParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 66..67,
+        },
+    },
+    Token {
+        kind: Literal(
+            Str(
+                "hello world!",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 67..81,
+        },
+    },
+    Token {
+        kind: CloseParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 81..82,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 82..83,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 83..84,
+        },
+    },
+    Token {
+        kind: CloseBrace,
+        span: Span {
+            file: "../../main.dr",
+            range: 84..85,
+        },
+    },
+    Token {
+        kind: Whitespace,
+        span: Span {
+            file: "../../main.dr",
+            range: 85..86,
+        },
+    },
+    Token {
+        kind: Eof,
+        span: Span {
+            file: "../../main.dr",
+            range: 86..86,
+        },
+    },
+]

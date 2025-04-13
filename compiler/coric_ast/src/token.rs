@@ -8,8 +8,7 @@ pub struct Token {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TokenKind {
-    Comment(String), // // coment
-    Whitespace,      // Any whitespace
+    Comment, // // coment
 
     Keyword(KeywordKind), // Keyword
     Literal(LiteralKind), // Literal
@@ -41,8 +40,9 @@ pub enum TokenKind {
     Or,           // `|`
     And,          // `&`
 
-    Unknown, // Unknown token, e.g. "№"
-    Eof,     // End of file
+    Whitespace, // Any whitespace
+    Unknown,    // Unknown token, e.g. "№"
+    Eof,        // End of file
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

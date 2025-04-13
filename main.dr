@@ -1,9 +1,8 @@
-_start() {
-    let i = 1;
-}
+mode main;
 
-exit() {
-    ["mov rax, 60"];
-    ["mov rdi, 1"];
-    ["syscall"];
+nec std;
+index std<io<println>>;
+
+main() {
+    println("hello world!");
 }
