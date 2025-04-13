@@ -1,14 +1,23 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use std::ops::Range;
+
+pub struct Logger {
+    src: String,
+    filename: String,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+impl Logger {
+    pub fn new(src: String, filename: String) -> Self {
+        Logger { src, filename }
+    }
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    pub fn error(self, message: String, range: Range<usize>) {
+        println!("\x1b[31merror\x1b[0m in {}", self.filename,);
+        println!("{}", self.src[range].to_string());
+        println!("{}", message);
+        Self::exit()
+    }
+
+    fn exit() {
+        std::process::exit(1);
     }
 }
