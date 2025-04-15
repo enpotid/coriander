@@ -1,7 +1,7 @@
 [
     Token {
-        kind: Ident(
-            "mode",
+        kind: Keyword(
+            Mode,
         ),
         span: Span {
             file: "../../main.dr",
@@ -46,8 +46,8 @@
         },
     },
     Token {
-        kind: Ident(
-            "nec",
+        kind: Keyword(
+            Nec,
         ),
         span: Span {
             file: "../../main.dr",
@@ -85,8 +85,8 @@
         },
     },
     Token {
-        kind: Ident(
-            "index",
+        kind: Keyword(
+            Index,
         ),
         span: Span {
             file: "../../main.dr",
@@ -110,10 +110,17 @@
         },
     },
     Token {
-        kind: Lt,
+        kind: Not,
         span: Span {
             file: "../../main.dr",
             range: 30..31,
+        },
+    },
+    Token {
+        kind: Not,
+        span: Span {
+            file: "../../main.dr",
+            range: 31..32,
         },
     },
     Token {
@@ -122,14 +129,21 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 31..33,
+            range: 32..34,
         },
     },
     Token {
-        kind: Lt,
+        kind: Not,
         span: Span {
             file: "../../main.dr",
-            range: 33..34,
+            range: 34..35,
+        },
+    },
+    Token {
+        kind: Not,
+        span: Span {
+            file: "../../main.dr",
+            range: 35..36,
         },
     },
     Token {
@@ -138,21 +152,7 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 34..41,
-        },
-    },
-    Token {
-        kind: Gt,
-        span: Span {
-            file: "../../main.dr",
-            range: 41..42,
-        },
-    },
-    Token {
-        kind: Gt,
-        span: Span {
-            file: "../../main.dr",
-            range: 42..43,
+            range: 36..43,
         },
     },
     Token {

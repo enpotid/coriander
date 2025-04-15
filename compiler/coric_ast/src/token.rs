@@ -54,13 +54,19 @@ pub enum LiteralKind {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum KeywordKind {
-    Let, // let a = 1;
+    Let,   // let a = 1;
+    Index, // index std!!io;
+    Mode,  // mode main;
+    Nec,   // nec std;
 }
 
 impl KeywordKind {
     pub fn from_str(str: &str) -> Option<Self> {
         match str {
             "let" => Some(KeywordKind::Let),
+            "index" => Some(KeywordKind::Index),
+            "mode" => Some(KeywordKind::Mode),
+            "nec" => Some(KeywordKind::Nec),
             _ => None,
         }
     }
