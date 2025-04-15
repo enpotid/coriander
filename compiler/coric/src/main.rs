@@ -1,5 +1,6 @@
 use coric_codegen::Target;
 use coric_lexer::Lexer;
+use coric_logger::Logger;
 use std::env;
 use std::fs;
 use std::process::Command;
@@ -21,7 +22,9 @@ fn main() {
         }
     };
 
-    let mut lexer = Lexer::new(&src, args[1].clone());
+    let logger = Logger::new(src.clone(), args[1].clone());
+
+    let mut lexer = Lexer::new(&src, args[1].clone(), logger);
     let tokens = lexer.tokenize();
 
     println!("{tokens:#?}");

@@ -8,3 +8,4 @@ coric_ast = { path = "../coric_ast" }
 coric_codegen = { path = "../coric_codegen" }
 coric_lexer = { path = "../coric_lexer" }
 coric_parse = { path = "../coric_parse" }
+coric_logger = { path = "../coric_logger" }
