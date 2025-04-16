@@ -28,6 +28,7 @@ impl<'a> Lexer<'a> {
 
         while let Some(token) = token_iter.next() {
             match token.kind {
+                TokenKind::Whitespace => {}
                 TokenKind::Unknown => {
                     self.logger.error("unknown token", token.span.range);
                     is_error = true;

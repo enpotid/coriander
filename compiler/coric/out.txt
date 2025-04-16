@@ -9,13 +9,6 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 4..5,
-        },
-    },
-    Token {
         kind: Ident(
             "main",
         ),
@@ -32,33 +25,12 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 10..11,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 11..12,
-        },
-    },
-    Token {
         kind: Keyword(
             Nec,
         ),
         span: Span {
             file: "../../main.dr",
             range: 12..15,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 15..16,
         },
     },
     Token {
@@ -78,26 +50,12 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 20..21,
-        },
-    },
-    Token {
         kind: Keyword(
             Index,
         ),
         span: Span {
             file: "../../main.dr",
             range: 21..26,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 26..27,
         },
     },
     Token {
@@ -163,20 +121,6 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 44..45,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 45..46,
-        },
-    },
-    Token {
         kind: Ident(
             "main",
         ),
@@ -200,52 +144,10 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 52..53,
-        },
-    },
-    Token {
         kind: OpenBrace,
         span: Span {
             file: "../../main.dr",
             range: 53..54,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 54..55,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 55..56,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 56..57,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 57..58,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 58..59,
         },
     },
     Token {
@@ -290,24 +192,10 @@
         },
     },
     Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 83..84,
-        },
-    },
-    Token {
         kind: CloseBrace,
         span: Span {
             file: "../../main.dr",
             range: 84..85,
-        },
-    },
-    Token {
-        kind: Whitespace,
-        span: Span {
-            file: "../../main.dr",
-            range: 85..86,
         },
     },
     Token {
