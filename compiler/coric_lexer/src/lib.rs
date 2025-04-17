@@ -28,6 +28,31 @@ impl<'a> Lexer<'a> {
 
         while let Some(token) = token_iter.next() {
             match token.kind {
+                TokenKind::Not => {
+                    if let Some(token_peek) = token_iter.peek() {
+                        match token_peek.kind {
+                            TokenKind::Not => {
+                                self.push_token_range(
+                                    TokenKind::PathSep,
+                                    token.span.range.start..token_peek.span.range.end,
+                                );
+                                token_iter.next();
+                            }
+                            TokenKind::Eq => {
+                                self.push_token_range(
+                                    TokenKind::Ne,
+                                    token.span.range.start..token_peek.span.range.end,
+                                );
+                                token_iter.next();
+                            }
+                            _ => {
+                                self.push_token(token);
+                            }
+                        }
+                    } else {
+                        self.push_token(token);
+                    }
+                }
                 TokenKind::Whitespace => {}
                 TokenKind::Unknown => {
                     self.logger.error("unknown token", token.span.range);

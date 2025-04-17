@@ -68,17 +68,10 @@
         },
     },
     Token {
-        kind: Not,
+        kind: PathSep,
         span: Span {
             file: "../../main.dr",
-            range: 30..31,
-        },
-    },
-    Token {
-        kind: Not,
-        span: Span {
-            file: "../../main.dr",
-            range: 31..32,
+            range: 30..32,
         },
     },
     Token {
@@ -91,17 +84,10 @@
         },
     },
     Token {
-        kind: Not,
+        kind: PathSep,
         span: Span {
             file: "../../main.dr",
-            range: 34..35,
-        },
-    },
-    Token {
-        kind: Not,
-        span: Span {
-            file: "../../main.dr",
-            range: 35..36,
+            range: 34..36,
         },
     },
     Token {

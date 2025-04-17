@@ -27,10 +27,15 @@ pub enum TokenKind {
     OpenBracket,  // `[`
     CloseBracket, // `]`
     Eq,           // `=`
+    EqEq,         // `==`
+    Ne,           // `!=`
     Lt,           // `<`
+    Le,           // `<=`
     Gt,           // `>`
+    Ge,           // `>=`
     Question,     // `?`
     Not,          // `!`
+    PathSep,      // `!!`
     Minus,        // `-`
     Plus,         // `+`
     Star,         // `*`
@@ -38,7 +43,9 @@ pub enum TokenKind {
     Caret,        // `^`
     Percent,      // `%`
     Or,           // `|`
+    OrOr,         // `||`
     And,          // `&`
+    AndAnd,       // `&&`
 
     Whitespace, // Any whitespace
     Unknown,    // Unknown token, e.g. "№"
