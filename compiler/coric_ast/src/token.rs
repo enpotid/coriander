@@ -8,8 +8,6 @@ pub struct Token {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TokenKind {
-    Comment, // // coment
-
     Keyword(KeywordKind), // Keyword
     Literal(LiteralKind), // Literal
     Ident(String),        // Identifier
@@ -28,7 +26,6 @@ pub enum TokenKind {
     CloseBracket, // `]`
     Eq,           // `=`
     EqEq,         // `==`
-    Ne,           // `!=`
     Lt,           // `<`
     Le,           // `<=`
     Gt,           // `>`
@@ -36,6 +33,7 @@ pub enum TokenKind {
     Question,     // `?`
     Not,          // `!`
     PathSep,      // `!!`
+    Ne,           // `!=`
     Minus,        // `-`
     Plus,         // `+`
     Star,         // `*`
@@ -48,6 +46,7 @@ pub enum TokenKind {
     AndAnd,       // `&&`
 
     Whitespace, // Any whitespace
+    Comment,    // // coment
     Unknown,    // Unknown token, e.g. "№"
     Eof,        // End of file
 }
