@@ -4,5 +4,11 @@ nec std;
 index std!!io!!println;
 
 main() {
-    println("hello world!");
+    >>=
+    <<=
+    ==
+    ||
+    &&
+    >>
+    <<
 }

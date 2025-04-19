@@ -5,6 +5,13 @@ use coric_logger::Logger;
 use cursor::*;
 use std::{iter::Peekable, ops::Range, vec::IntoIter};
 
+enum P {
+    One(TokenKind, TokenKind),
+    Two((TokenKind, TokenKind), (TokenKind, TokenKind)),
+}
+
+use P::*;
+
 pub struct Lexer {
     logger: Logger,
     tokens: Vec<Token>,
@@ -32,26 +39,44 @@ impl Lexer {
         while let Some(token) = self.token_iter.next() {
             match token.kind {
                 TokenKind::Or => {
-                    self.if_push(token, vec![(TokenKind::Or, TokenKind::OrOr)]);
+                    self.if_push(token, vec![One(TokenKind::Or, TokenKind::OrOr)]);
                 }
                 TokenKind::And => {
-                    self.if_push(token, vec![(TokenKind::And, TokenKind::AndAnd)]);
+                    self.if_push(token, vec![One(TokenKind::And, TokenKind::AndAnd)]);
                 }
                 TokenKind::Lt => {
-                    self.if_push(token, vec![(TokenKind::Eq, TokenKind::Le)]);
+                    self.if_push(
+                        token,
+                        vec![
+                            One(TokenKind::Eq, TokenKind::Le),
+                            Two(
+                                (TokenKind::Lt, TokenKind::Shl),
+                                (TokenKind::Eq, TokenKind::ShlEq),
+                            ),
+                        ],
+                    );
                 }
                 TokenKind::Gt => {
-                    self.if_push(token, vec![(TokenKind::Eq, TokenKind::Ge)]);
+                    self.if_push(
+                        token,
+                        vec![
+                            One(TokenKind::Eq, TokenKind::Ge),
+                            Two(
+                                (TokenKind::Gt, TokenKind::Shr),
+                                (TokenKind::Eq, TokenKind::ShrEq),
+                            ),
+                        ],
+                    );
                 }
                 TokenKind::Eq => {
-                    self.if_push(token, vec![(TokenKind::Eq, TokenKind::EqEq)]);
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::EqEq)]);
                 }
                 TokenKind::Not => {
                     self.if_push(
                         token,
                         vec![
-                            (TokenKind::Not, TokenKind::PathSep),
-                            (TokenKind::Eq, TokenKind::Ne),
+                            One(TokenKind::Not, TokenKind::PathSep),
+                            One(TokenKind::Eq, TokenKind::Ne),
                         ],
                     );
                 }
@@ -71,16 +96,40 @@ impl Lexer {
         self.tokens.clone()
     }
 
-    fn if_push(&mut self, token: Token, list: Vec<(TokenKind, TokenKind)>) {
+    fn if_push(&mut self, token: Token, list: Vec<P>) {
         let token_peek = self.token_iter.peek().unwrap().clone();
-        for (if_token_kind, push_token_kind) in list {
-            if token_peek.kind == if_token_kind {
-                self.push_token_range(
-                    push_token_kind,
-                    token.span.range.start..token_peek.span.range.end,
-                );
-                self.token_iter.next();
-                return;
+        for p in list {
+            match p {
+                One(if_token_kind, push_token_kind) => {
+                    if token_peek.kind == if_token_kind {
+                        self.push_token_range(
+                            push_token_kind,
+                            token.span.range.start..token_peek.span.range.end,
+                        );
+                        self.token_iter.next();
+                        return;
+                    }
+                }
+                Two((if_token_kind_a, push_token_kind_a), (if_token_kind_b, push_token_kind_b)) => {
+                    if token_peek.kind == if_token_kind_a {
+                        self.token_iter.next();
+                        let second_token_peek = self.token_iter.peek().unwrap().clone();
+                        if second_token_peek.kind == if_token_kind_b {
+                            self.push_token_range(
+                                push_token_kind_b,
+                                token.span.range.start..second_token_peek.span.range.end,
+                            );
+                            self.token_iter.next();
+                            return;
+                        } else {
+                            self.push_token_range(
+                                push_token_kind_a,
+                                token.span.range.start..token_peek.span.range.end,
+                            );
+                            return;
+                        }
+                    }
+                }
             }
         }
         self.push_token(token);

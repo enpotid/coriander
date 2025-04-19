@@ -28,8 +28,12 @@ pub enum TokenKind {
     EqEq,         // `==`
     Lt,           // `<`
     Le,           // `<=`
+    Shl,          // `<<`
+    ShlEq,        // `<<=`
     Gt,           // `>`
     Ge,           // `>=`
+    Shr,          // `>>`
+    ShrEq,        // `>>=`
     Question,     // `?`
     Not,          // `!`
     PathSep,      // `!!`
