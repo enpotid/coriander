@@ -38,14 +38,47 @@ impl Lexer {
 
         while let Some(token) = self.token_iter.next() {
             match token.kind {
+                TokenKind::Plus => {
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::PlusEq)]);
+                }
                 TokenKind::Minus => {
-                    self.if_push(token, vec![One(TokenKind::Gt, TokenKind::RArrow)]);
+                    self.if_push(
+                        token,
+                        vec![
+                            One(TokenKind::Gt, TokenKind::RArrow),
+                            One(TokenKind::Eq, TokenKind::MinusEq),
+                        ],
+                    );
+                }
+                TokenKind::Star => {
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::StarEq)]);
+                }
+                TokenKind::Slash => {
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::SlashEq)]);
+                }
+                TokenKind::Percent => {
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::PercentEq)]);
+                }
+                TokenKind::Caret => {
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::CaretEq)]);
                 }
                 TokenKind::Or => {
-                    self.if_push(token, vec![One(TokenKind::Or, TokenKind::OrOr)]);
+                    self.if_push(
+                        token,
+                        vec![
+                            One(TokenKind::Or, TokenKind::OrOr),
+                            One(TokenKind::Eq, TokenKind::OrEq),
+                        ],
+                    );
                 }
                 TokenKind::And => {
-                    self.if_push(token, vec![One(TokenKind::And, TokenKind::AndAnd)]);
+                    self.if_push(
+                        token,
+                        vec![
+                            One(TokenKind::And, TokenKind::AndAnd),
+                            One(TokenKind::Eq, TokenKind::AndEq),
+                        ],
+                    );
                 }
                 TokenKind::Lt => {
                     self.if_push(

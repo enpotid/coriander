@@ -1089,55 +1089,23 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 556..559,
+            range: 557..560,
         },
     },
     Token {
         kind: Ident(
-            "v",
+            "k",
         ),
         span: Span {
             file: "../../main.dr",
-            range: 560..561,
+            range: 561..562,
         },
     },
     Token {
         kind: Eq,
         span: Span {
             file: "../../main.dr",
-            range: 562..563,
-        },
-    },
-    Token {
-        kind: Ident(
-            "V",
-        ),
-        span: Span {
-            file: "../../main.dr",
-            range: 564..565,
-        },
-    },
-    Token {
-        kind: PathSep,
-        span: Span {
-            file: "../../main.dr",
-            range: 565..567,
-        },
-    },
-    Token {
-        kind: Ident(
-            "new",
-        ),
-        span: Span {
-            file: "../../main.dr",
-            range: 567..570,
-        },
-    },
-    Token {
-        kind: OpenParen,
-        span: Span {
-            file: "../../main.dr",
-            range: 570..571,
+            range: 563..564,
         },
     },
     Token {
@@ -1148,21 +1116,363 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 571..572,
-        },
-    },
-    Token {
-        kind: CloseParen,
-        span: Span {
-            file: "../../main.dr",
-            range: 572..573,
+            range: 565..566,
         },
     },
     Token {
         kind: Semi,
         span: Span {
             file: "../../main.dr",
-            range: 573..574,
+            range: 566..567,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 572..573,
+        },
+    },
+    Token {
+        kind: PlusEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 574..576,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 577..578,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 578..579,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 584..585,
+        },
+    },
+    Token {
+        kind: MinusEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 586..588,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 589..590,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 590..591,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 596..597,
+        },
+    },
+    Token {
+        kind: StarEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 598..600,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 601..602,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 602..603,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 608..609,
+        },
+    },
+    Token {
+        kind: SlashEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 610..612,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 613..614,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 614..615,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 620..621,
+        },
+    },
+    Token {
+        kind: PercentEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 622..624,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 625..626,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 626..627,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 632..633,
+        },
+    },
+    Token {
+        kind: CaretEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 634..636,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 637..638,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 638..639,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 644..645,
+        },
+    },
+    Token {
+        kind: OrEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 646..648,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 649..650,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 650..651,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 656..657,
+        },
+    },
+    Token {
+        kind: AndEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 658..660,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 661..662,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 662..663,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 668..669,
+        },
+    },
+    Token {
+        kind: ShlEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 670..673,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 674..675,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 675..676,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 681..682,
+        },
+    },
+    Token {
+        kind: ShrEq,
+        span: Span {
+            file: "../../main.dr",
+            range: 683..686,
+        },
+    },
+    Token {
+        kind: Literal(
+            Int(
+                "1",
+            ),
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 687..688,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 688..689,
+        },
+    },
+    Token {
+        kind: Keyword(
+            Let,
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 695..698,
         },
     },
     Token {
@@ -1171,14 +1481,85 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 579..580,
+            range: 699..700,
+        },
+    },
+    Token {
+        kind: Eq,
+        span: Span {
+            file: "../../main.dr",
+            range: 701..702,
+        },
+    },
+    Token {
+        kind: Ident(
+            "V",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 703..704,
+        },
+    },
+    Token {
+        kind: PathSep,
+        span: Span {
+            file: "../../main.dr",
+            range: 704..706,
+        },
+    },
+    Token {
+        kind: Ident(
+            "new",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 706..709,
+        },
+    },
+    Token {
+        kind: OpenParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 709..710,
+        },
+    },
+    Token {
+        kind: Ident(
+            "k",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 710..711,
+        },
+    },
+    Token {
+        kind: CloseParen,
+        span: Span {
+            file: "../../main.dr",
+            range: 711..712,
+        },
+    },
+    Token {
+        kind: Semi,
+        span: Span {
+            file: "../../main.dr",
+            range: 712..713,
+        },
+    },
+    Token {
+        kind: Ident(
+            "v",
+        ),
+        span: Span {
+            file: "../../main.dr",
+            range: 718..719,
         },
     },
     Token {
         kind: Dot,
         span: Span {
             file: "../../main.dr",
-            range: 580..581,
+            range: 719..720,
         },
     },
     Token {
@@ -1187,42 +1568,42 @@
         ),
         span: Span {
             file: "../../main.dr",
-            range: 581..583,
+            range: 720..722,
         },
     },
     Token {
         kind: OpenParen,
         span: Span {
             file: "../../main.dr",
-            range: 583..584,
+            range: 722..723,
         },
     },
     Token {
         kind: CloseParen,
         span: Span {
             file: "../../main.dr",
-            range: 584..585,
+            range: 723..724,
         },
     },
     Token {
         kind: Semi,
         span: Span {
             file: "../../main.dr",
-            range: 585..586,
+            range: 724..725,
         },
     },
     Token {
         kind: CloseBrace,
         span: Span {
             file: "../../main.dr",
-            range: 587..588,
+            range: 726..727,
         },
     },
     Token {
         kind: Eof,
         span: Span {
             file: "../../main.dr",
-            range: 589..589,
+            range: 728..728,
         },
     },
 ]

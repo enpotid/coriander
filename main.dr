@@ -42,6 +42,19 @@ V {
 
 main() {
     println("Hello World!");
-    let v = V!!new(1);
+
+    let k = 1;
+    k += 1;
+    k -= 1;
+    k *= 1;
+    k /= 1;
+    k %= 1;
+    k ^= 1;
+    k |= 1;
+    k &= 1;
+    k <<= 1;
+    k >>= 1;
+
+    let v = V!!new(k);
     v.hi();
 }

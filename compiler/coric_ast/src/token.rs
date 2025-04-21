@@ -29,11 +29,9 @@ pub enum TokenKind {
     Lt,           // `<`
     Le,           // `<=`
     Shl,          // `<<`
-    ShlEq,        // `<<=`
     Gt,           // `>`
     Ge,           // `>=`
     Shr,          // `>>`
-    ShrEq,        // `>>=`
     Question,     // `?`
     Not,          // `!`
     PathSep,      // `!!`
@@ -52,6 +50,16 @@ pub enum TokenKind {
     OrOr,         // `||`
     And,          // `&`
     AndAnd,       // `&&`
+    ShlEq,        // `<<=`
+    ShrEq,        // `>>=`
+    PlusEq,       // `+=`
+    MinusEq,      // `-=`
+    StarEq,       // `*=`
+    SlashEq,      // `/=`
+    PercentEq,    // `%=`
+    CaretEq,      // `^=`
+    OrEq,         // `|=`
+    AndEq,        // `&=`
 
     Whitespace, // Any whitespace
     Comment,    // // coment
