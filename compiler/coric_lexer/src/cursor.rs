@@ -144,6 +144,7 @@ impl<'a> Cursor<'a> {
                 '>' => self.push_token_char(TokenKind::Gt, i),
                 '?' => self.push_token_char(TokenKind::Question, i),
                 '!' => self.push_token_char(TokenKind::Not, i),
+                ':' => self.push_token_char(TokenKind::Colon, i),
                 '-' => self.push_token_char(TokenKind::Minus, i),
                 '+' => self.push_token_char(TokenKind::Plus, i),
                 '*' => self.push_token_char(TokenKind::Star, i),

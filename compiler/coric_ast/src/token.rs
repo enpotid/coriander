@@ -38,6 +38,10 @@ pub enum TokenKind {
     Not,          // `!`
     PathSep,      // `!!`
     Ne,           // `!=`
+    Colon,        // `:`
+    RArrow,       // `->`
+    LArrow,       // `<-`
+    FatArrow,     // `=>`
     Minus,        // `-`
     Plus,         // `+`
     Star,         // `*`
@@ -64,10 +68,11 @@ pub enum LiteralKind {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum KeywordKind {
-    Let,   // let a = 1;
-    Index, // index std!!io;
-    Mode,  // mode main;
-    Nec,   // nec std;
+    Let,    // let a = 1;
+    Index,  // index std!!io;
+    Mode,   // mode main;
+    Nec,    // nec std;
+    Return, // return x;
 }
 
 impl KeywordKind {
@@ -77,6 +82,7 @@ impl KeywordKind {
             "index" => Some(KeywordKind::Index),
             "mode" => Some(KeywordKind::Mode),
             "nec" => Some(KeywordKind::Nec),
+            "return" => Some(KeywordKind::Return),
             _ => None,
         }
     }

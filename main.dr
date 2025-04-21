@@ -3,12 +3,45 @@ mode main;
 nec std;
 index std!!io!!println;
 
+A [
+    C,
+    D,
+    E,
+    F
+] {
+    new(k: u8) -> A {
+        return match k {
+            1 => A!!C,
+            2 => A!!D,
+            3 => A!!E,
+            _ => A!!F
+        };
+    }
+
+    exit() {
+        [
+            "mov rax, 60",
+            "mov rdi, 1",
+            "syscall"
+        ];
+    }
+}
+
+V {
+    kind: A
+} {
+    new(k: u8) -> V {
+        return V { kind = A!!new(k) };
+    }
+
+    hi(self) {
+        println(self.kind);
+        A!!exit();
+    }
+}
+
 main() {
-    >>=
-    <<=
-    ==
-    ||
-    &&
-    >>
-    <<
+    println("Hello World!");
+    let v = V!!new(1);
+    v.hi();
 }
