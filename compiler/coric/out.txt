@@ -274,8 +274,8 @@
         },
     },
     Token {
-        kind: Ident(
-            "match",
+        kind: Keyword(
+            Match,
         ),
         span: Span {
             file: "../../main.dr",

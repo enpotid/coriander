@@ -81,6 +81,7 @@ pub enum KeywordKind {
     Mode,   // mode main;
     Nec,    // nec std;
     Return, // return x;
+    Match,  // match x {}
 }
 
 impl KeywordKind {
@@ -91,6 +92,7 @@ impl KeywordKind {
             "mode" => Some(KeywordKind::Mode),
             "nec" => Some(KeywordKind::Nec),
             "return" => Some(KeywordKind::Return),
+            "match" => Some(KeywordKind::Match),
             _ => None,
         }
     }
