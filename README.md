@@ -1,3 +1,29 @@
-![coriander-w-t](https://github.com/user-attachments/assets/97a393ff-2f3e-4e84-98ef-ac9b0b023b80)
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/40e752a2-c783-4216-9516-fe4147a233ff">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/9688be3e-2097-46db-be59-eb6c5e4f77bc">
+    <img alt="The Coriander Programming Language"
+         src="https://github.com/user-attachments/assets/9688be3e-2097-46db-be59-eb6c5e4f77bc"
+         width="50%">
+  </picture>
+</div>
+
 # Why Coriander?
-idk
+It can use libraries without an OS... and it is very low-level!
+# Grammar
+- Declarations
+```
+ident() {}    // Function
+Ident[] {}    // Enum
+Ident{} {}    // Struct
+```
+- Function prefix (option xor)
+```
+~    // No ret
+=    // No mangle
+!    // No function setting
+#    // Global function
+>    // Entry point (~, =, !, #)
+-    // Inline function (~, !) If this is used, other prefixes will be ignored
+^    // Just jump (~, !)
+```
