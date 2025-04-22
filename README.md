@@ -27,3 +27,12 @@ Ident{} {}    // Struct
 -    // Inline function (~, !) If this is used, other prefixes will be ignored
 ^    // Just jump (~, !)
 ```
+- Keyword
+```
+let       // let idnet = x;
+mode      // mode main;
+nec       // nec std;
+index     // index std!!io!!println;
+return    // return x;
+match     // match x {}
+```
