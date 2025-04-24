@@ -6,7 +6,12 @@
          src="https://github.com/user-attachments/assets/9688be3e-2097-46db-be59-eb6c5e4f77bc"
          width="50%">
   </picture>
+
+[Website] | [Learn]
 </div>
+
+[Website]: https://enpotid.github.io/coriander
+[Learn]: https://enpotid.github.io/coriander/learn
 
 # Why Coriander?
 It can use libraries without an OS... and it is very low-level!
