@@ -78,7 +78,6 @@ pub enum LiteralKind {
 pub enum KeywordKind {
     Let,    // let a = 1;
     Index,  // index std!!io;
-    Mode,   // mode main;
     Nec,    // nec std;
     Return, // return x;
     Match,  // match x {}
@@ -89,7 +88,6 @@ impl KeywordKind {
         match str {
             "let" => Some(KeywordKind::Let),
             "index" => Some(KeywordKind::Index),
-            "mode" => Some(KeywordKind::Mode),
             "nec" => Some(KeywordKind::Nec),
             "return" => Some(KeywordKind::Return),
             "match" => Some(KeywordKind::Match),

@@ -1,5 +1,3 @@
-mode main;
-
 nec std;
 index std!!io!!println;
 
@@ -38,6 +36,10 @@ V {
         println(self.kind);
         A!!exit();
     }
+}
+
+>_start() {
+    main();
 }
 
 main() {

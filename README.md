@@ -35,7 +35,6 @@ Ident{} {}    // Struct
 - Keyword
 ```
 let       // let idnet = x;
-mode      // mode main;
 nec       // nec std;
 index     // index std!!io!!println;
 return    // return x;
