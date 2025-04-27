@@ -34,9 +34,9 @@ pub enum TokenKind {
     Shr,          // `>>`
     Question,     // `?`
     Not,          // `!`
-    PathSep,      // `!!`
     Ne,           // `!=`
     Colon,        // `:`
+    PathSep,      // `::`
     RArrow,       // `->`
     LArrow,       // `<-`
     FatArrow,     // `=>`

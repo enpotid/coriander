@@ -115,13 +115,10 @@ impl Lexer {
                     );
                 }
                 TokenKind::Not => {
-                    self.if_push(
-                        token,
-                        vec![
-                            One(TokenKind::Not, TokenKind::PathSep),
-                            One(TokenKind::Eq, TokenKind::Ne),
-                        ],
-                    );
+                    self.if_push(token, vec![One(TokenKind::Eq, TokenKind::Ne)]);
+                }
+                TokenKind::Colon => {
+                    self.if_push(token, vec![One(TokenKind::Colon, TokenKind::PathSep)]);
                 }
                 TokenKind::Whitespace | TokenKind::Comment => {}
                 TokenKind::Unknown => {
