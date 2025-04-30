@@ -81,6 +81,8 @@ pub enum KeywordKind {
     Nec,    // nec std;
     Return, // return x;
     Match,  // match x {}
+    True,   // true (bool)
+    False,  // false (bool)
 }
 
 impl KeywordKind {
@@ -91,6 +93,8 @@ impl KeywordKind {
             "nec" => Some(KeywordKind::Nec),
             "return" => Some(KeywordKind::Return),
             "match" => Some(KeywordKind::Match),
+            "true" => Some(KeywordKind::True),
+            "false" => Some(KeywordKind::False),
             _ => None,
         }
     }
