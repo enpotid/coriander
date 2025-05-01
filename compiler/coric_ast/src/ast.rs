@@ -27,6 +27,7 @@ pub struct Ty {
 #[derive(Debug, Clone)]
 pub enum TyKind {
     Prim(PrimTy),
+    Tup(Vec<Ty>),
 }
 
 #[derive(Debug, Clone)]
