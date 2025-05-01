@@ -1,0 +1,28 @@
+nec std;
+index core::ops::add;
+index std::{str::String, io::println, fmt::{Kind, format, print}};
+
+
+A {
+    v: usize
+} {
+    new(v: usize) -> A {
+        return A { v };
+    }
+
+    <add>(self, other: A) -> A {
+        return A { v: self.v + other.v };
+    }
+
+    <print>(self) -> String {
+        return self.v.to_string();
+    }
+}
+
+>main() {
+    let a = A::new(1);
+    let b = A::new(2);
+
+    let ans = format(Kind::Display, a + b);
+    println(ans);
+}

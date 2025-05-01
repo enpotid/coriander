@@ -38,11 +38,7 @@ V {
     }
 }
 
->_start() {
-    main();
-}
-
-main() {
+>main() {
     println("Hello World!");
 
     let k = 1;
