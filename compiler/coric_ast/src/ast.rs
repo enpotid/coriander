@@ -28,6 +28,7 @@ pub struct Ty {
 pub enum TyKind {
     Prim(PrimTy),
     Tup(Vec<Ty>),
+    Path(Path),
 }
 
 #[derive(Debug, Clone)]
@@ -51,7 +52,7 @@ pub enum PrimTy {
 #[derive(Debug, Clone)]
 pub enum ItemKind {
     Nec(Ident),
-    Index,
+    Index(Ident, Path),
     Enum(Ident, EnumDef),
     Struct(Ident, VariantData),
     Fn,
@@ -81,4 +82,17 @@ pub struct FieldDef {
     pub ident: Option<Ident>,
     pub ty: Ty,
     pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct Path {
+    pub ident: Ident,
+    pub segments: Option<Box<Path>>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub enum PathTree {
+    Simple(Path),
+    Group(Vec<Path>),
 }
