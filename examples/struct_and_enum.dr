@@ -1,12 +1,27 @@
 nec std;
-index std::io::println;
+index std::linux::io::println;
 
 A [
     C,
     D,
     E,
     F
-] {
+]
+
+V {
+    kind: A
+} {
+    new(k: u8) -> V {
+        return V { kind: A::new(k) };
+    }
+
+    hi(self) {
+        println(self.kind);
+        A::exit();
+    }
+}
+
+.A {
     new(k: u8) -> A {
         return match k {
             1 => A::C,
@@ -22,19 +37,6 @@ A [
             "mov rdi, 1",
             "syscall"
         ];
-    }
-}
-
-V {
-    kind: A
-} {
-    new(k: u8) -> V {
-        return V { kind: A::new(k) };
-    }
-
-    hi(self) {
-        println(self.kind);
-        A::exit();
     }
 }
 
