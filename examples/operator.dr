@@ -1,0 +1,25 @@
+nec std;
+index std::linux::{str::String, io::println};
+
+A {
+    v: usize
+} {
+    new(v: usize) -> A {
+        return A { v };
+    }
+
+    to_string(self) -> String {
+        return self.v.to_string();
+    }
+
+    +(self, other: A) -> A {
+        return A { v: self.v + other.v };
+    }
+}
+
+>main() {
+    let a = A::new(1);
+    let b = A::new(2);
+
+    println((a + b).to_string());
+}
