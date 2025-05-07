@@ -10,8 +10,8 @@
 [Website] | [Learn]
 </div>
 
-[Website]: https://enpotid.github.io/coriander
-[Learn]: https://enpotid.github.io/coriander/learn
+[Website]: https://coriander.enpotid.com/
+[Learn]: https://coriander.enpotid.com/learn
 
 # Why Coriander?
 It can use libraries without an OS... and it is very low-level!
