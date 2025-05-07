@@ -1,25 +1,24 @@
-nec std;
-index std::linux::{str::String, io::println};
+..std::linux::{str::String, io::println};
 
 A {
-    v: usize
+    v: Usize
 } {
-    new(v: usize) -> A {
-        return A { v };
+    new(v: Usize) -> A {
+        -> A { v: v };
     }
 
-    to_string(self) -> String {
-        return self.v.to_string();
+    to_string(self: A) -> String {
+        -> self.v.to_string();
     }
 
-    +(self, other: A) -> A {
-        return A { v: self.v + other.v };
+    +(self: A, other: A) -> A {
+        -> A { v: self.v + other.v };
     }
 }
 
 >main() {
-    let a = A::new(1);
-    let b = A::new(2);
+    a: A = A::new(1);
+    b: A = A::new(2);
 
     println((a + b).to_string());
 }
