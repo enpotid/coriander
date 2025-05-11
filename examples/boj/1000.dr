@@ -1,0 +1,8 @@
+..std::linux::io::{read_uint, println};
+
+>_start() {
+    a: U64 = read_uint();
+    b: U64 = read_uint();
+
+    println((a + b).to_string());
+}

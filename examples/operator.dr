@@ -1,9 +1,9 @@
 ..std::linux::{str::String, io::println};
 
 A {
-    v: Usize
+    v: U64
 } {
-    new(v: Usize) -> A {
+    new(v: U64) -> A {
         -> A { v: v };
     }
 
