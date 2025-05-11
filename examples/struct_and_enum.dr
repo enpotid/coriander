@@ -46,7 +46,7 @@ V {
     }
 }
 
->main() {
+>_start() {
     println("Hello World!");
 
     k: U64 = 1;

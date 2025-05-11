@@ -16,7 +16,7 @@ A {
     }
 }
 
->main() {
+>_start() {
     a: A = A::new(1);
     b: A = A::new(2);
 
