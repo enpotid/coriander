@@ -1,0 +1,1 @@
+..std::linux::io::{read_uint,println};>main(){a:I64=read_uint()->I64;b:I64=read_uint()->I64;println((a-b).to_chars());}
