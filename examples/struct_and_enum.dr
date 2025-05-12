@@ -1,4 +1,4 @@
-..std::linux::{str::String, io::println};
+..std::linux::io::println;
 
 A [
     C,
@@ -15,7 +15,7 @@ A [
         };
     }
 
-    to_string(self: A) -> String {
+    to_chars(self: A) -> Char[?] {
         -> self : {
             C => "C",
             D => "D",
@@ -41,7 +41,7 @@ V {
     }
 
     hi(self: V) {
-        println(self.kind.to_string());
+        println(self.kind.to_chars());
         A::exit();
     }
 }

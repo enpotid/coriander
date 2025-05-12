@@ -4,5 +4,5 @@
     a: U64 = read_uint();
     b: U64 = read_uint();
 
-    println((a + b).to_string());
+    println((a + b).to_chars());
 }

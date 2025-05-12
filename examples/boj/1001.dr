@@ -4,5 +4,5 @@
     a: I64 = read_uint() -> I64;
     b: I64 = read_uint() -> I64;
 
-    println((a - b).to_string());
+    println((a - b).to_chars());
 }

@@ -1,4 +1,4 @@
-..std::linux::{str::String, io::println};
+..std::linux::io::println;
 
 A {
     v: U64
@@ -7,8 +7,8 @@ A {
         -> A { v: v };
     }
 
-    to_string(self: A) -> String {
-        -> self.v.to_string();
+    to_chars(self: A) -> Char[?] {
+        -> self.v.to_chars();
     }
 
     +(self: A, other: A) -> A {
@@ -20,5 +20,5 @@ A {
     a: A = A::new(1);
     b: A = A::new(2);
 
-    println((a + b).to_string());
+    println((a + b).to_chars());
 }
