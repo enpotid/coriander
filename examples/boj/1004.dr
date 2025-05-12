@@ -1,0 +1,35 @@
+..std::linux::io::{read_uint, println};
+
+>main() {
+    t: U64 = read_uint();
+
+    @ _ <- 0..t {
+        sx: I32 = read_uint() -> I32;
+        sy: I32 = read_uint() -> I32;
+        ex: I32 = read_uint() -> I32;
+        ey: I32 = read_uint() -> I32;
+
+        n: U64 = read_uint();
+
+        c: U64 = 0;
+        @ _ <- 0..t {
+            cx: I32 = read_uint() -> I32;
+            cy: I32 = read_uint() -> I32;
+            r: I32 = read_uint() -> I32;
+
+            $ isin(cx, cy, r, sx, sy) != isin(cx, cy, r, ex, ey) {
+                c += 1;
+            }
+        }
+
+        println(c.to_chars());
+    }
+}
+
+isin(ox: I32, oy: I32, or: I32, x: I32, y: I32) -> Bool {
+    dx: I32 = ox - x;
+    dy: I32 = oy - y;
+    ds: I32 = dx * dx + dy * dy;
+
+    -> ds < or * or;
+}
