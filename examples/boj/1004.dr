@@ -4,18 +4,18 @@
     t: U64 = read_uint();
 
     @ _ <- 0..t {
-        sx: I32 = read_int();
-        sy: I32 = read_int();
-        ex: I32 = read_int();
-        ey: I32 = read_int();
+        sx: I32 = read_int() -> I32;
+        sy: I32 = read_int() -> I32;
+        ex: I32 = read_int() -> I32;
+        ey: I32 = read_int() -> I32;
 
         n: U64 = read_uint();
 
         c: U64 = 0;
         @ _ <- 0..t {
-            cx: I32 = read_int();
-            cy: I32 = read_int();
-            r: I32 = read_int();
+            cx: I32 = read_int() -> I32;
+            cy: I32 = read_int() -> I32;
+            r: I32 = read_int() -> I32;
 
             $ isin(cx, cy, r, sx, sy) != isin(cx, cy, r, ex, ey) {
                 c += 1;

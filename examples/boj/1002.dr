@@ -1,15 +1,15 @@
-..std::linux::io::{read_uint, println};
+..std::linux::io::{read_uint, read_int, println};
 
 >main() {
     t: U64 = read_uint();
 
     @ _ <- 0..t {
-        xa: I32 = read_uint() -> I32;
-        ya: I32 = read_uint() -> I32;
-        ra: I32 = read_uint() -> I32;
-        xb: I32 = read_uint() -> I32;
-        yb: I32 = read_uint() -> I32;
-        rb: I32 = read_uint() -> I32;
+        xa: I32 = read_int() -> I32;
+        ya: I32 = read_int() -> I32;
+        ra: I32 = read_int() -> I32;
+        xb: I32 = read_int() -> I32;
+        yb: I32 = read_int() -> I32;
+        rb: I32 = read_int() -> I32;
 
         dx: I32 = xa - xb;
         dy: I32 = ya - yb;
