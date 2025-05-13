@@ -15,6 +15,7 @@ pub enum TokenKind {
     Semi,         // `;`
     Comma,        // `,`
     Dot,          // `.`
+    DotDot,       // `..`
     Tilde,        // `~`
     At,           // `@`
     Pound,        // `#`
@@ -46,6 +47,7 @@ pub enum TokenKind {
     Slash,        // `/`
     Caret,        // `^`
     Percent,      // `%`
+    Dollar,       // `$`
     Or,           // `|`
     OrOr,         // `||`
     And,          // `&`

@@ -150,6 +150,7 @@ impl<'a> Cursor<'a> {
                 '*' => self.push_token_char(TokenKind::Star, i),
                 '^' => self.push_token_char(TokenKind::Caret, i),
                 '%' => self.push_token_char(TokenKind::Percent, i),
+                '$' => self.push_token_char(TokenKind::Dollar, i),
                 '|' => self.push_token_char(TokenKind::Or, i),
                 '&' => self.push_token_char(TokenKind::And, i),
 

@@ -38,6 +38,9 @@ impl Lexer {
 
         while let Some(token) = self.token_iter.next() {
             match token.kind {
+                TokenKind::Dot => {
+                    self.if_push(token, vec![One(TokenKind::Dot, TokenKind::DotDot)]);
+                }
                 TokenKind::Plus => {
                     self.if_push(token, vec![One(TokenKind::Eq, TokenKind::PlusEq)]);
                 }
