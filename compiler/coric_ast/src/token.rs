@@ -8,7 +8,6 @@ pub struct Token {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TokenKind {
-    Keyword(KeywordKind), // Keyword
     Literal(LiteralKind), // Literal
     Ident(String),        // Identifier
 
@@ -74,30 +73,4 @@ pub enum LiteralKind {
     Int(String),   // `1234`
     Float(String), // `12.34`
     Str(String),   // `"hello"`
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum KeywordKind {
-    Let,    // let a = 1;
-    Index,  // index std!!io;
-    Nec,    // nec std;
-    Return, // return x;
-    Match,  // match x {}
-    True,   // true (bool)
-    False,  // false (bool)
-}
-
-impl KeywordKind {
-    pub fn from_str(str: &str) -> Option<Self> {
-        match str {
-            "let" => Some(KeywordKind::Let),
-            "index" => Some(KeywordKind::Index),
-            "nec" => Some(KeywordKind::Nec),
-            "return" => Some(KeywordKind::Return),
-            "match" => Some(KeywordKind::Match),
-            "true" => Some(KeywordKind::True),
-            "false" => Some(KeywordKind::False),
-            _ => None,
-        }
-    }
 }

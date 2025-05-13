@@ -1,4 +1,4 @@
-use coric_ast::{KeywordKind, LiteralKind, Span, Token, TokenKind};
+use coric_ast::{LiteralKind, Span, Token, TokenKind};
 use std::{iter::Peekable, ops::Range, str::CharIndices};
 
 pub struct Cursor<'a> {
@@ -58,11 +58,7 @@ impl<'a> Cursor<'a> {
                         }
                     }
 
-                    if let Some(keyword) = KeywordKind::from_str(&buffer) {
-                        self.push_token(TokenKind::Keyword(keyword), i..e);
-                    } else {
-                        self.push_token(TokenKind::Ident(buffer.clone()), i..e);
-                    }
+                    self.push_token(TokenKind::Ident(buffer.clone()), i..e);
                     buffer.clear();
                 }
 
