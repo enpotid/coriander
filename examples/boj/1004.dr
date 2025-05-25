@@ -1,4 +1,4 @@
-..std::linux::io::{read_int, read_uint, println};
+..std::linux::io::{read_uint, read_int, println};
 
 >main() {
     t: U64 = read_uint();

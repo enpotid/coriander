@@ -51,8 +51,6 @@ pub enum PrimTy {
 
 #[derive(Debug, Clone)]
 pub enum ItemKind {
-    Nec(Ident),
-    Index(Ident, Path),
     Enum(Ident, EnumDef),
     Struct(Ident, VariantData),
     Fn,
