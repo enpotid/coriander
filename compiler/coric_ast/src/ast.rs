@@ -53,8 +53,33 @@ pub enum PrimTy {
 pub enum ItemKind {
     Enum(Ident, EnumDef),
     Struct(Ident, VariantData),
-    Fn,
+    Fn(Fn),
 }
+
+#[derive(Debug, Clone)]
+pub struct Fn {
+    pub prefix: Vec<FnPrefix>,
+    pub ident: Ident,
+    pub body: Option<Block>,
+}
+
+#[derive(Debug, Clone)]
+pub enum FnPrefix {}
+
+#[derive(Debug, Clone)]
+pub struct Block {
+    pub stmts: Vec<Stmt>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct Stmt {
+    pub kind: StmtKind,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub enum StmtKind {}
 
 #[derive(Debug, Clone)]
 pub struct EnumDef {
